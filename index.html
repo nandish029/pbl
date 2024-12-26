@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our E-Commerce Bookstore</title>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: lighter;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+        .search-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .search-bar {
+            padding: 12px;
+            width: 80%;
+            max-width: 400px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            margin-bottom: 30px;
+        }
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+            justify-items: center;
+        }
+        .product {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 220px;
+            text-align: center;
+            border-top: 5px solid #3498db;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .product h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 15px 0;
+        }
+        .price {
+            color: #e67e22;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .about-section {
+            background-color: #34495e;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .about-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        .about-section p {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: auto;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Welcome to Our Bookstore</h1>
+        <p>Find Your Next Favorite Book</p>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search for books...">
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-container">
+        <div class="product">
+            <img src="The Great Gatsby.jpg" alt="Book 1">
+            <h3>The Great Gatsby</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>A classic novel by F. Scott Fitzgerald about the American dream.</p>
+            <a href="The Great Gatsby.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="1984.jpg" alt="Book 2">
+            <h3>1984</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>George Orwell's dystopian novel exploring the dangers of totalitarianism.</p>
+            <a href="1984.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="To Kill a Mockingbird.jpeg" alt="Book 3">
+            <h3>To Kill a Mockingbird</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Harper Lee's Pulitzer Prize-winning novel about racial injustice in the Deep South.</p>
+            <a href="To Kill a Mockingbird.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="Brave New World.jpeg" alt="Book 4">
+            <h3>Brave New World</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Aldous Huxley's science fiction novel about a utopian society.</p>
+            <a href="Brave New World.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="War and Peace.jpeg" alt="Book 5">
+            <h3>War and Peace</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Leo Tolstoy's epic novel about the Napoleonic Wars and Russian society.</p>
+            <a href="War and Peace.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="Crime and Punishment.jpg" alt="Book 6">
+            <h3>Crime and Punishment</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Dostoevsky's psychological novel about morality, guilt, and redemption.</p>
+            <a href="Crime and Punishment.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="Catch-22.jpg" alt="Book 7">
+            <h3>Catch-22</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Joseph Heller's satirical novel about the absurdities of war.</p>
+            <a href="Catch-22.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="Fahrenheit 451.jpg" alt="Book 8">
+            <h3>Fahrenheit 451</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Ray Bradbury's novel about a dystopian society where books are banned.</p>
+            <a href="Fahrenheit 451.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="Slaughterhouse-Five.jpg" alt="Book 9">
+            <h3>Slaughterhouse-Five</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Kurt Vonnegut's novel about World War II and time travel.</p>
+            <a href="Slaughterhouse-Five.html" class="button">View Details</a>
+        </div>
+        <div class="product">
+            <img src="Beloved.jpeg" alt="Book 10">
+            <h3>Beloved</h3>
+            <p class="price">&#8377;99.00</p>
+            <p>Toni Morrison's Pulitzer Prize-winning novel about the legacy of slavery.</p>
+            <a href="Beloved.html" class="button">View Details</a>
+        </div>
+    </div>
+
+   
+    <!-- About Books Section -->
+    <div class="about-section">
+        <h2>About Our Books</h2>
+        <p>Our collection of books spans a wide range of genres, from timeless classics to contemporary bestsellers. Whether you're a fan of fiction, history, science, or fantasy, we have something for every reader. All our books are carefully selected to bring you the best stories and knowledge, enriching your mind and imagination.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Our Bookstore | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        // Search bar functionality (simple)
+        document.querySelector('.search-bar').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(function(product) {
+                const productName = product.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
