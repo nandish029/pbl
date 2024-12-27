@@ -3,162 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
+    <title>Payment Page</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa; /* Light blue background */
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         .payment-container {
-            width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 20px;
-            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            width: 400px;
+        }
+
+        h2 {
             text-align: center;
-            position: relative;
-            top: -20px;
-        }
-
-        .payment-container h2 {
-            font-size: 32px;
+            margin-bottom: 20px;
             color: #333;
-            margin-bottom: 30px;
-            font-weight: bold;
-            text-transform: uppercase;
         }
 
-        .payment-container input {
-            width: 100%;
-            padding: 15px;
-            margin: 15px 0;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-
-        .payment-container input:focus {
-            border-color: #2575fc;
-            outline: none;
-        }
-
-        .payment-container .card-details {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .payment-container .card-details input {
-            width: 48%;
-        }
-
-        .payment-container .payment-method {
-            margin-top: 30px;
-            font-size: 18px;
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        .payment-container .payment-method label {
-            font-weight: bold;
-            display: flex;
-            align-items: center;
+        .form-group {
             margin-bottom: 15px;
-            font-size: 16px;
         }
 
-        .payment-container .payment-method input[type="radio"] {
-            margin-right: 10px;
-            accent-color: #2575fc;
-            width: 20px;
-            height: 20px;
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
         }
 
-        .payment-container button {
-            background-color: #2575fc;
-            color: white;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
+        .form-group input {
             width: 100%;
-            font-size: 18px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .btn-pay {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
-            text-transform: uppercase;
         }
 
-        .payment-container button:hover {
-            background-color: #6a11cb;
+        .btn-pay:hover {
+            background-color: #45a049;
         }
 
-        .payment-container .error {
-            color: red;
-            font-size: 14px;
-            margin-top: 10px;
+        .total-amount {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .total-amount span {
             font-weight: bold;
-        }
-
-        .payment-container .icon {
-            font-size: 50px;
-            margin-bottom: 30px;
-            color: #2575fc;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .payment-container {
-                padding: 25px;
-            }
-
-            .payment-container .card-details {
-                flex-direction: column;
-            }
-
-            .payment-container .card-details input {
-                width: 100%;
-                margin-bottom: 15px;
-            }
+            color: #4CAF50;
         }
     </style>
 </head>
 <body>
-
+   
     <div class="payment-container">
-        <div class="icon">
-            <i class="fa fa-credit-card"></i>
-        </div>
         <h2>Secure Payment</h2>
-        <form action="#" method="POST">
-            <input type="text" name="name" placeholder="Full Name" required><br>
-            <input type="email" name="email" placeholder="Email Address" required><br>
-
-            <div class="card-details">
-                <input type="text" name="cardNumber" placeholder="Card Number" maxlength="16" required><br>
-                <input type="text" name="expiry" placeholder="Expiry Date (MM/YY)" maxlength="5" required><br>
+        
+        <form id="payment-form">
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" pattern="\d{4} \d{4} \d{4} \d{4}" required>
             </div>
-            
-            <input type="text" name="cvv" placeholder="CVV" maxlength="3" required><br>
-
-            <!-- Payment Method Selection -->
-            <div class="payment-method">
-                <label><input type="radio" name="paymentMethod" value="creditCard" required> Credit/Debit Card</label><br>
-                <label><input type="radio" name="paymentMethod" value="paypal" required> PayPal</label>
+            <div class="form-group">
+                <label for="card-holder">Card Holder Name</label>
+                <input type="text" id="card-holder" placeholder="John Doe" required>
             </div>
-
-            <button type="submit">Pay Now</button>
-            <p class="error">Please complete all fields correctly.</p>
+            <div class="form-group">
+                <label for="expiry">Expiry Date</label>
+                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" pattern="\d{2}/\d{2}" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="password" id="cvv" placeholder="123" maxlength="3" pattern="\d{3}" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="number" id="amount"  required>
+            </div>
+            <button type="submit" class="btn-pay">Pay Now</button>
         </form>
     </div>
+    <style>
+        .payment-container {
+            animation: slideIn 0.8s ease-out;
+        }
 
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .btn-pay {
+            animation: pulse 2s 1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .total-amount {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-group input:hover {
+            background-color: #f8f8f8;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+
+    
+       
 </body>
 </html>

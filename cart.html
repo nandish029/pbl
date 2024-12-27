@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <script src="cart.js" defer></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            color: #8580ca;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            background-color: #3e8e41;
+            transform: scale(1.1);
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 20px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border: none;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fff;
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8f8f8;
+        }
+
+        tr:hover td {
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        /* Remove Button Styles */
+        .remove {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .remove:hover {
+            background-color: #cc0000;
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <h1>Shopping Cart</h1>
+
+    <table id="cartTable">
+        <thead>
+            <tr>
+                <th>Picture</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Cart items will be dynamically loaded here -->
+        </tbody>
+    </table>
+
+    <h2>Total: &#8377;<span id="totalPrice">0.00</span></h2>
+    <a href="payment.html" onclick="displayCart()">Proceed to Payment</a>
+    <a href="index.html">Continue Shopping</a>
+</body>
+</html>
