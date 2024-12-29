@@ -1,50 +1,44 @@
-// cart.js
+// Initialize the book or retrieve it from localStorage
+let book = JSON.parse(localStorage.getItem('book')) || [];
 
-// Initialize the cart or retrieve it from localStorage
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-
-
-// Function to add items to the cart
+// Function to add items to the book
 function addToCart(id, title, price, image) {
-    const existingItem = cart.find(item => item.id === id);
+    const existingItem = book.find(item => item.id === id);
     if (existingItem) {
         alert('This item is already in the cart');
     } else {
-        cart.push({ id, title, price, image });
-        localStorage.setItem('cart', JSON.stringify(cart));
+        book.push({ id, title, price, image });
+        localStorage.setItem('book', JSON.stringify(book));
         alert('Item added to cart');
     }
 }
 
-// Function to display the cart items
+// Function to display the book items
 function displayCart() {
     const cartTable = document.getElementById('cartTable').querySelector('tbody');
     const totalPriceElement = document.getElementById('totalPrice');
     
-    cartTable.innerHTML = '';
+    cartTable.innerHTML = ''; // Clear the table
     let totalPrice = 0;
 
-    cart.forEach(item => {
+    book.forEach(item => {
         const row = cartTable.insertRow();
         row.innerHTML = `
             <td><img src="${item.image}" alt="${item.title}" width="50"></td>
             <td>${item.title}</td>
-            <td>$${item.price.toFixed(2)}</td>
-            <td><button class="remove" button onclick="removeFromCart('${item.id}')">Remove</button></td>
+            <td>&#8377;${item.price.toFixed(2)}</td>
+            <td><button class="remove" onclick="removeFromCart('${item.id}')">Remove</button></td>
         `;
         totalPrice += item.price;
-        
-            });
-     totalPrice=NaN;
-    totalPriceElement.textContent = totalPrice.toFixed(2);
-    
-        }
+    });
 
-// Function to remove items from the cart
+    totalPriceElement.textContent = totalPrice.toFixed(2); // Display the total price
+}
+
+// Function to remove items from the book
 function removeFromCart(id) {
-    cart = cart.filter(item => item.id !== id);
-    localStorage.setItem('cart', JSON.stringify(cart));
+    book = book.filter(item => item.id !== id);
+    localStorage.setItem('book', JSON.stringify(book));
     displayCart();
 }
 

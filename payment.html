@@ -7,157 +7,160 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
             padding: 0;
-            background-color: #f4f4f4;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
         }
 
         .payment-container {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px 30px;
-            width: 400px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        h2 {
-            text-align: center;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .payment-container h1 {
             margin-bottom: 20px;
+            font-size: 28px;
             color: #333;
         }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
+        .payment-container p {
+            font-size: 18px;
+            margin-bottom: 20px;
             color: #555;
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-            box-sizing: border-box;
+        .payment-options {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .btn-pay {
+        .payment-option {
+            padding: 10px 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: #28a745;
+            color: #28a745;
+        }
+
+        .payment-option.active {
+            border-color: #28a745;
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .card-details {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .card-details input {
+            display: block;
             width: 100%;
-            background-color: #4CAF50;
-            color: white;
             padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .payment-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: #fff;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
-        .btn-pay:hover {
-            background-color: #45a049;
-        }
-
-        .total-amount {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 18px;
-            color: #333;
-        }
-
-        .total-amount span {
-            font-weight: bold;
-            color: #4CAF50;
+        .payment-container button:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
-   
     <div class="payment-container">
-        <h2>Secure Payment</h2>
-        
-        <form id="payment-form">
-            <div class="form-group">
-                <label for="card-number">Card Number</label>
-                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19" pattern="\d{4} \d{4} \d{4} \d{4}" required>
-            </div>
-            <div class="form-group">
-                <label for="card-holder">Card Holder Name</label>
-                <input type="text" id="card-holder" placeholder="John Doe" required>
-            </div>
-            <div class="form-group">
-                <label for="expiry">Expiry Date</label>
-                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5" pattern="\d{2}/\d{2}" required>
-            </div>
-            <div class="form-group">
-                <label for="cvv">CVV</label>
-                <input type="password" id="cvv" placeholder="123" maxlength="3" pattern="\d{3}" required>
-            </div>
-            <div class="form-group">
-                <label for="amount">Amount</label>
-                <input type="number" id="amount"  required>
-            </div>
-            <button type="submit" class="btn-pay">Pay Now</button>
-        </form>
+        <h1>Payment Page</h1>
+        <p>Total Price: &#8377;<span id="finalPrice">0.00</span></p>
+
+        <div class="payment-options">
+            <div id="cardOption" class="payment-option">Debit/Credit Card</div>
+            <div id="paypalOption" class="payment-option">PayPal</div>
+        </div>
+
+        <div id="cardDetails" class="card-details">
+            <input type="text" placeholder="Cardholder Name" id="cardName">
+            <input type="text" placeholder="Card Number" id="cardNumber" maxlength="16">
+            <input type="text" placeholder="Expiry Date (MM/YY)" id="cardExpiry">
+            <input type="text" placeholder="CVV" id="cardCVV" maxlength="3">
+        </div>
+
+        <button id="payButton">Proceed to Payment</button>
     </div>
-    <style>
-        .payment-container {
-            animation: slideIn 0.8s ease-out;
-        }
 
-        @keyframes slideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const finalPriceElement = document.getElementById('finalPrice');
+            const book = JSON.parse(localStorage.getItem('book')) || [];
+            const totalPrice = book.reduce((sum, item) => sum + item.price, 0);
+            finalPriceElement.textContent = totalPrice.toFixed(2);
 
-        .btn-pay {
-            animation: pulse 2s 1;
-        }
+            const cardOption = document.getElementById('cardOption');
+            const paypalOption = document.getElementById('paypalOption');
+            const cardDetails = document.getElementById('cardDetails');
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+            cardOption.addEventListener('click', () => {
+                cardOption.classList.add('active');
+                paypalOption.classList.remove('active');
+                cardDetails.style.display = 'block';
+            });
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #4CAF50;
-            box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
-            transition: all 0.3s ease;
-        }
+            paypalOption.addEventListener('click', () => {
+                paypalOption.classList.add('active');
+                cardOption.classList.remove('active');
+                cardDetails.style.display = 'none';
+            });
 
-        .total-amount {
-            animation: fadeIn 1s ease-in;
-        }
+            document.getElementById('payButton').onclick = () => {
+                const isCardSelected = cardOption.classList.contains('active');
+                if (isCardSelected) {
+                    const cardName = document.getElementById('cardName').value;
+                    const cardNumber = document.getElementById('cardNumber').value;
+                    const cardExpiry = document.getElementById('cardExpiry').value;
+                    const cardCVV = document.getElementById('cardCVV').value;
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+                    if (!cardName || !cardNumber || !cardExpiry || !cardCVV) {
+                        alert('Please fill in all card details.');
+                        return;
+                    }
 
-        .form-group input:hover {
-            background-color: #f8f8f8;
-            transition: background-color 0.3s ease;
-        }
-    </style>
-
-    
-       
+                    alert('Payment with Card is being processed!');
+                } else {
+                    alert('Redirecting to PayPal!');
+                }
+            };
+        });
+    </script>
 </body>
 </html>
